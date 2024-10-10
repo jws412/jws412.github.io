@@ -3,14 +3,39 @@
     margin: 0px;
 }
 
-h1, h2, li, p {
+html, body {
+    height: 100%;
+    width: 100%;
+    
+    /*Define the width of the blank columns flanking all content 
+    in the document.*/
+    --space: 100px;
+}
+
+h1, h2, li, p, label {
     font-family: helvetica, arial;
     font-size: 18px;
     font-weight: 400;
     line-height: 150%;
-    padding-left: 100px;
-    padding-right: 100px;
+}
+
+h1, h2, p {
+    padding-left: var(--space);
+    padding-right: var(--space);
     text-align: justify;
+}
+
+body > ul, body > ol {
+    margin-left: calc(24px + var(--space));
+}
+
+body > ul li, body > ol li {
+    padding-left: 24px;
+    text-align: justify;
+}
+
+body > ul > li, body > ol > li {
+    margin-right: var(--space);
 }
 
 h1, h2 {
@@ -25,28 +50,34 @@ h1 {
     color: #FFFFFF;
 }
 
-body > ul, body > ol {
-    margin-left: 120px;
-}
-ul ul {
-    margin-left: 20px;
-}
-
-div.figure {
-    align-items: center;
-    display: flex;
-    flex-flow: column wrap;
+p.figure {
     padding: 24px;
+    padding-top: 0;
+    text-align: center;
 }
 
-div.figure img {
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: min(950px, calc( 100% - 2*var(--space) ));
+    overflow: auto;
     width: 100%;
-    max-width: 929px;
 }
 
-p.reference {
+/*Apply a negative indent configuration to all "p" elements following 
+the "References" header.*/
+h2.reference ~ p {
     text-indent: -36px;
     margin-left: 36px;
+}
+
+.map {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-left: var(--space);
+    margin-right: var(--space);
+    overflow: auto;
 }
 
 .map .journey p {
@@ -54,12 +85,15 @@ p.reference {
     margin: 2px;
     outline: 2px solid black;
     padding: 0;
-    position: relative; /*Important for the absolute position of arrows.*/
+    
+    /*Important for the absolute position of arrows.*/
+    position: relative;
+    
     text-align: center;
 }
 
 .map .journey p:not(.emotion) {
-    margin-bottom: 100px;
+    margin-bottom: var(--space);
 }
 
 .map .journey p:not(.emotion)::after {
@@ -72,7 +106,6 @@ p.reference {
     writing-mode: vertical-rl;
 }
 
-
 .map .journey {
     display: flex;
     flex-flow: column wrap;
@@ -80,12 +113,62 @@ p.reference {
     justify-content: space-between;
 }
 
-.map {
+.map .journey label {
+    padding-bottom: 18px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 18px;
+}
+
+table {
+    margin-left: var(--space);
+    margin-right: var(--space);
+    
+    /*Simplify layout calculations for the browser. This setting has
+    not effect otherwise.*/
+    table-layout: fixed
+}
+
+table tr td {
+    /*Use outlines and not borders because the former does not take up 
+    space. This property allows outlines to overlap with each other.*/
+    outline: solid #000000 2px;
+    
+    /*Essential for positioning labels in cell corners.*/
+    position: relative;
+    
+    /*Set all four table cells with even widths.*/
+    width: 50%;
+}
+
+table tr td div {
+    align-content: space-evenly;
     display: flex;
-    flex-flow: row nowrap;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-evenly;
+    padding-bottom: 24px;
+    padding-top: 24px;
+}
+
+table tr td div p {
+    background: #EEEEEE;
+    
+    /*Transparent borders pads the "p" elements between the 
+    container they are in.*/
+    border: 12px solid #FFFFFFFF;
+    
+    /*Prevent blurbs from stretching across whole lines.*/
+    max-width: 248px;
+    
+    /*Cancel the effects of the default padding for "p" elements.*/
     padding: 0;
-    margin: 0;
-    margin-left: 100px;
-    margin-right: 100px;
-    overflow: auto;
+    
+    text-align: center;
+}
+
+table tr td label {
+    position: absolute;
+    top: 0;
+    left: 2px;
 }
