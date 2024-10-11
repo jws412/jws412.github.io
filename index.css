@@ -9,7 +9,7 @@ html, body {
     
     /*Define the width of the blank columns flanking all content 
     in the document.*/
-    --space: 100px;
+    --space: 150px;
 }
 
 h1, h2, li, p, label {
@@ -19,7 +19,7 @@ h1, h2, li, p, label {
     line-height: 150%;
 }
 
-h1, h2, p {
+h2, p {
     padding-left: var(--space);
     padding-right: var(--space);
     text-align: justify;
@@ -46,8 +46,9 @@ h1, h2 {
 }
 
 h1 {
-    background: #307030;
+    background: #307730;
     color: #FFFFFF;
+    text-align: center;
 }
 
 p.figure {
